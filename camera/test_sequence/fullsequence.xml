@@ -1,0 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Syncronorm_ShowSequence_V1.0 PatchGUID="2be540ef-e362-4ac2-8f33-3a02bacfba64" GUID="7564a74e-4c26-4186-bba1-5e915b218a2e" Name="Empty" SequenceLenght="30" CreateDate="02.06.2020 14:45:06" LastUpdate="02.06.2020 15:02:00" Version="1" Revision="1" SMPTE_Offset="0" Send_Timecode_from_Childsequences="False" Time_BeatBar1="0" Time_BeatBar2="0" Num_BeatBars="1" AllOffOnEnd="True" SequenceAutoLength="True">
+  <tracks> <track GUID="2a09d298-3157-446b-bddf-4760b09aeae9" TrackType="9" Hide="False" Mute="False" Name="CAMERA TRACK" Solo="False" Collapsed="False" DefaultACLEnabled="False" DefaultTracking="True" StreamFileTitel="76524e32-968a-4639-a3de-f50fe5e11578.bin" StreamingDMXLine="0" AudioVolumen="100" UsedUniqueChase="False" TrackBackColor="-16724271" TrackForeColor="-1"> <blocks> </blocks></track></tracks>
+</Syncronorm_ShowSequence_V1.0>
