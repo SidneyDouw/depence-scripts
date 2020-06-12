@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Syncronorm_ShowSequence_V1.0 PatchGUID="2be540ef-e362-4ac2-8f33-3a02bacfba64" GUID="b3c43f9a-ed16-4a61-802d-e9c257c7f947" Name="SEQ_CameraTest_Sinus" SequenceLenght="13" CreateDate="12.06.2020 12:37:21" LastUpdate="12.06.2020 12:50:39" Version="1" Revision="1" SMPTE_Offset="0" Send_Timecode_from_Childsequences="False" Time_BeatBar1="0" Time_BeatBar2="0" Num_BeatBars="1" AllOffOnEnd="True" SequenceAutoLength="True">
+  
+  <tracks>
+    <track GUID="b0077a20-37b1-4dff-9d28-2301cf9a6711" TrackType="9" Hide="False" Mute="False" Name="CAMERA TRACK" Solo="False" Collapsed="False" DefaultACLEnabled="False" DefaultTracking="True" StreamFileTitel="67cea311-557b-4daf-b518-ee3037fd36ff.bin" StreamingDMXLine="0" AudioVolumen="100" UsedUniqueChase="False" TrackBackColor="-16724271" TrackForeColor="-1">
+      <blocks>
+        
+        <block Name="CamPos" StartTime="0" Lenght="1" FadeInTime="1" FadeOutTime="0" DelayInTime="0" DelayOutTime="0" BeatsPerMinute="120" UseACD="False" ACD_InDelay="0" ACD_InFade="0" ACD_OutDelay="0" ACD_OutFade="0" Mute="False" Freeze="False" Tracking="True" EffectSpeedOffset="0" MultiSceneGUID="de45eea9-7887-4e1e-903a-ab35e029cfea" FadePhase="True" LightColor="-1">
+          <LightColorX red="255" green="255" blue="255" amber="0" white="0" intensity="255" CellX="0" CellY="0"> </LightColorX>
+        </block>
+        
+        <block Name="CamPos" StartTime="2" Lenght="5" FadeInTime="5" FadeOutTime="0" DelayInTime="0" DelayOutTime="0" BeatsPerMinute="120" UseACD="False" ACD_InDelay="0" ACD_InFade="0" ACD_OutDelay="0" ACD_OutFade="0" Mute="False" Freeze="False" Tracking="True" EffectSpeedOffset="0" MultiSceneGUID="09b59b5f-2d7f-4d7e-8b6c-2f02c2c92dcc" FadePhase="True" FadeType="1" DelayType="1" LightColor="-1">
+          <LightColorX red="255" green="255" blue="255" amber="0" white="0" intensity="255" CellX="0" CellY="0"> </LightColorX>
+        </block>
+        
+        <block Name="CamPos" StartTime="8" Lenght="5" FadeInTime="5" FadeOutTime="0" DelayInTime="0" DelayOutTime="0" BeatsPerMinute="120" UseACD="False" ACD_InDelay="0" ACD_InFade="0" ACD_OutDelay="0" ACD_OutFade="0" Mute="False" Freeze="False" Tracking="True" EffectSpeedOffset="0" MultiSceneGUID="3cd90fcf-b58b-4ebd-957d-6942ec4b3fd0" FadePhase="True" FadeType="1" DelayType="1" LightColor="-1">
+          <LightColorX red="255" green="255" blue="255" amber="0" white="0" intensity="255" CellX="0" CellY="0"> </LightColorX>
+        </block>
+      
+      </blocks>
+    </track>
+  </tracks>
+  
+  <SceneList>
+  
+    <scene GUID="de45eea9-7887-4e1e-903a-ab35e029cfea" Name="CamPos">
+      <Items>
+        <Item UID="65500" InFadePoint="100" OutFadePoint="100" Phase="-24,64406" SelectionIndex="0" FadePhase="True"> </Item>
+        <Item UID="65504" InFadePoint="100" OutFadePoint="100" Phase="3,066318" SelectionIndex="0" FadePhase="True"> </Item>
+        <Item UID="65508" InFadePoint="100" OutFadePoint="100" Phase="23,87475" SelectionIndex="0" FadePhase="True"> </Item>
+        <Item UID="65512" InFadePoint="100" OutFadePoint="100" Phase="-324,6962" SelectionIndex="0" FadePhase="True"> </Item>
+        <Item UID="65516" InFadePoint="100" OutFadePoint="100" Phase="-2,674022" SelectionIndex="0" FadePhase="True"> </Item>
+        <Item UID="65520" InFadePoint="100" OutFadePoint="100" Phase="8,537737E-07" SelectionIndex="0" FadePhase="True"> </Item>
+      </Items>
+      <WayPoints> </WayPoints>  
+    </scene>
+
+    <scene GUID="09b59b5f-2d7f-4d7e-8b6c-2f02c2c92dcc" Name="CamPos">
+      <Items>
+        <Item UID="65500" InFadePoint="100" OutFadePoint="100" Phase="0,1715688" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65504" InFadePoint="100" OutFadePoint="100" Phase="4,241851" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65508" InFadePoint="100" OutFadePoint="100" Phase="36,31539" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65512" InFadePoint="100" OutFadePoint="100" Phase="-357,9319" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65516" InFadePoint="100" OutFadePoint="100" Phase="-1,642567" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65520" InFadePoint="100" OutFadePoint="100" Phase="8,537737E-07" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+      </Items>
+      <WayPoints> </WayPoints>
+    </scene>
+    
+    <scene GUID="3cd90fcf-b58b-4ebd-957d-6942ec4b3fd0" Name="CamPos">
+      <Items>
+        <Item UID="65500" InFadePoint="100" OutFadePoint="100" Phase="22,0086" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65504" InFadePoint="100" OutFadePoint="100" Phase="9,895711" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65508" InFadePoint="100" OutFadePoint="100" Phase="26,64093" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65512" InFadePoint="100" OutFadePoint="100" Phase="-385,4373" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65516" InFadePoint="100" OutFadePoint="100" Phase="9,588845" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+        <Item UID="65520" InFadePoint="100" OutFadePoint="100" Phase="8,537737E-07" SelectionIndex="0" FadePhase="True" FadeType="1" DelayType="1"> </Item>
+      </Items>
+      <WayPoints> </WayPoints>
+    </scene>
+    
+  </SceneList>
+
+</Syncronorm_ShowSequence_V1.0>

@@ -13,8 +13,7 @@ import uuid
 import time
 import os
 
-DEBUG = True
-
+DEBUG = False
 
 class Dialog(GeDialog):
 
@@ -26,47 +25,40 @@ class Dialog(GeDialog):
     endFrame = 1000
     targetFPS = 30
 
-    didPressOK = False
+    didPressOK=False
 
     def CreateLayout(self):
 
         self.SetTitle("Make VPad Camera")
 
         self.GroupBegin(111, c4d.BFH_SCALEFIT, cols=2)
-        self.AddStaticText(1000, c4d.BFH_LEFT,
-                           name="KeyFrame Interval", initw=200)
+        self.AddStaticText(1000, c4d.BFH_LEFT, name="KeyFrame Interval", initw=200)
         self.AddEditSlider(1001, c4d.BFH_SCALEFIT)
-        self.SetInt32(1001, self.keyFrameInterval,
-                      min=1, max=10, step=1, max2=10000)
+        self.SetInt32(1001, self.keyFrameInterval, min=1, max=10, step=1, max2=10000)
         self.GroupEnd()
 
         self.GroupBegin(112, c4d.BFH_SCALEFIT, cols=2)
         self.AddStaticText(1002, c4d.BFH_LEFT, name="TimeOffset", initw=200)
         self.AddEditSlider(1003, c4d.BFH_SCALEFIT)
-        self.SetInt32(1003, self.timeOffsetInFrames, min=-500,
-                      max=500, step=1, min2=-10000, max2=10000)
+        self.SetInt32(1003, self.timeOffsetInFrames, min=-500, max=500, step=1, min2=-10000, max2=10000)
         self.GroupEnd()
 
         self.GroupBegin(113, c4d.BFH_SCALEFIT, cols=2)
         self.AddStaticText(1004, c4d.BFH_LEFT, name="Scene Scale", initw=200)
         self.AddEditSlider(1005, c4d.BFH_SCALEFIT)
-        self.SetFloat(1005, self.sceneScale, min=0.0001, max=10,
-                      step=0.01, format=c4d.FORMAT_FLOAT, max2=1000, quadscale=True)
+        self.SetFloat(1005, self.sceneScale, min=0.0001, max=10, step=0.01, format=c4d.FORMAT_FLOAT, max2=1000, quadscale=True)
         self.GroupEnd()
 
         self.GroupBegin(114, c4d.BFH_SCALEFIT, cols=2)
-        self.AddStaticText(1006, c4d.BFH_LEFT,
-                           name="Space Between Blocks", initw=200)
+        self.AddStaticText(1006, c4d.BFH_LEFT, name="Space Between Blocks", initw=200)
         self.AddEditSlider(1007, c4d.BFH_SCALEFIT)
-        self.SetFloat(1007, self.frameSpaceInS, min=0, max=1, step=0.01,
-                      format=c4d.FORMAT_FLOAT, max2=100, quadscale=True)
+        self.SetFloat(1007, self.frameSpaceInS, min=0, max=1, step=0.01, format=c4d.FORMAT_FLOAT, max2=100, quadscale=True)
         self.GroupEnd()
 
         self.GroupBegin(115, c4d.BFH_SCALEFIT, cols=2)
         self.AddStaticText(1008, c4d.BFH_LEFT, name="First Frame", initw=200)
         self.AddEditSlider(1009, c4d.BFH_SCALEFIT)
-        self.SetInt32(1009, self.startFrame, min=0,
-                      max=1000, step=1, max2=99999)
+        self.SetInt32(1009, self.startFrame, min=0, max=1000, step=1, max2=99999)
         self.GroupEnd()
 
         self.GroupBegin(115, c4d.BFH_SCALEFIT, cols=2)
@@ -134,8 +126,7 @@ def main():
             camTracks.append(track)
 
     rangeStart = camTracks[0].GetCurve().GetKey(0).GetTime().GetFrame(docFPS)
-    rangeEnd = camTracks[0].GetCurve().GetKey(
-        camTracks[0].GetCurve().GetKeyCount()-1).GetTime().GetFrame(docFPS)
+    rangeEnd = camTracks[0].GetCurve().GetKey(camTracks[0].GetCurve().GetKeyCount()-1).GetTime().GetFrame(docFPS)
 
     dlg = Dialog()
     dlg.startFrame = rangeStart
