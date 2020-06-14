@@ -15,6 +15,7 @@ import os
 
 DEBUG = False
 
+
 class Dialog(GeDialog):
 
     keyFrameInterval = 6
@@ -25,7 +26,7 @@ class Dialog(GeDialog):
     endFrame = 1000
     targetFPS = 30
 
-    didPressOK=False
+    didPressOK = False
 
     def CreateLayout(self):
 
@@ -46,13 +47,15 @@ class Dialog(GeDialog):
         self.GroupBegin(113, c4d.BFH_SCALEFIT, cols=2)
         self.AddStaticText(1004, c4d.BFH_LEFT, name="Scene Scale", initw=200)
         self.AddEditSlider(1005, c4d.BFH_SCALEFIT)
-        self.SetFloat(1005, self.sceneScale, min=0.0001, max=10, step=0.01, format=c4d.FORMAT_FLOAT, max2=1000, quadscale=True)
+        self.SetFloat(1005, self.sceneScale, min=0.0001, max=10, step=0.01,
+                      format=c4d.FORMAT_FLOAT, max2=1000, quadscale=True)
         self.GroupEnd()
 
         self.GroupBegin(114, c4d.BFH_SCALEFIT, cols=2)
         self.AddStaticText(1006, c4d.BFH_LEFT, name="Space Between Blocks", initw=200)
         self.AddEditSlider(1007, c4d.BFH_SCALEFIT)
-        self.SetFloat(1007, self.frameSpaceInS, min=0, max=1, step=0.01, format=c4d.FORMAT_FLOAT, max2=100, quadscale=True)
+        self.SetFloat(1007, self.frameSpaceInS, min=0, max=1, step=0.01,
+                      format=c4d.FORMAT_FLOAT, max2=100, quadscale=True)
         self.GroupEnd()
 
         self.GroupBegin(115, c4d.BFH_SCALEFIT, cols=2)
