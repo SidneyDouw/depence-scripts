@@ -54,12 +54,22 @@ def main():
         length = camInfo['length']
         endTime = startTime + length
 
+        curveType = camInfo['curveType']
+
         posXkeyStart = c4d.CKey()
         posYkeyStart = c4d.CKey()
         posZkeyStart = c4d.CKey()
         rotXkeyStart = c4d.CKey()
         rotYkeyStart = c4d.CKey()
         rotZkeyStart = c4d.CKey()
+
+        if (curveType == "Sinus"):
+            posXkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
+            posYkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
+            posZkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
+            rotXkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
+            rotYkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
+            rotZkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
 
         # Set StartTime values
         posXkeyStart.SetTime(posXcurve, c4d.BaseTime(startTime))
