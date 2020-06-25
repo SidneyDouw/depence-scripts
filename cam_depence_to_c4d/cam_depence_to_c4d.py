@@ -9,16 +9,18 @@ from c4d import documents
 
 def main():
 
+    DOCUMENT_FPS = 30
+
     camInfoArr = parseXML('SEQ_CameraTest_Linear')
     lastEl = camInfoArr[len(camInfoArr) - 1]
 
     # Setup document
     doc = documents.GetActiveDocument()
-    doc.SetFps(30)
+    doc.SetFps(DOCUMENT_FPS)
     doc.SetMaxTime(c4d.BaseTime(lastEl['startTime'] + lastEl['length']))
 
     rd = doc.GetActiveRenderData()
-    rd[c4d.RDATA_FRAMERATE] = 30
+    rd[c4d.RDATA_FRAMERATE] = DOCUMENT_FPS
 
     # Create, setup and insert Camera object
     camera = c4d.BaseObject(c4d.Ocamera)
@@ -63,14 +65,6 @@ def main():
         rotYkeyStart = c4d.CKey()
         rotZkeyStart = c4d.CKey()
 
-        if (curveType == "Sinus"):
-            posXkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-            posYkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-            posZkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-            rotXkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-            rotYkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-            rotZkeyStart.SetInterpolation(c4d.CINTERPOLATION_SPLINE)
-
         # Set StartTime values
         posXkeyStart.SetTime(posXcurve, c4d.BaseTime(startTime))
         posXkeyStart.SetValue(posXcurve, previousTransform[0])
@@ -84,6 +78,23 @@ def main():
         rotYkeyStart.SetValue(rotYcurve, previousTransform[4])
         rotZkeyStart.SetTime(rotZcurve, c4d.BaseTime(startTime))
         rotZkeyStart.SetValue(rotZcurve, previousTransform[5])
+
+        if (curveType == "Sinus"):
+            tangentLength = c4d.BaseTime(length * (4.0/15.0))
+            nTangentLength = c4d.BaseTime(length * (4.0/15.0) * -1)
+
+            # posXkeyStart.SetTimeLeft(posXcurve, nTangentLength)
+            posXkeyStart.SetTimeRight(posXcurve, tangentLength)
+            # posYkeyStart.SetTimeLeft(posYcurve, nTangentLength)
+            posYkeyStart.SetTimeRight(posYcurve, tangentLength)
+            # posZkeyStart.SetTimeLeft(posZcurve, nTangentLength)
+            posZkeyStart.SetTimeRight(posZcurve, tangentLength)
+            # rotXkeyStart.SetTimeLeft(rotXcurve, nTangentLength)
+            rotXkeyStart.SetTimeRight(rotXcurve, tangentLength)
+            # rotYkeyStart.SetTimeLeft(rotYcurve, nTangentLength)
+            rotYkeyStart.SetTimeRight(rotYcurve, tangentLength)
+            # rotZkeyStart.SetTimeLeft(rotZcurve, nTangentLength)
+            rotZkeyStart.SetTimeRight(rotZcurve, tangentLength)
 
         posXcurve.InsertKey(posXkeyStart)
         posYcurve.InsertKey(posYkeyStart)
@@ -112,6 +123,23 @@ def main():
         rotYkeyEnd.SetValue(rotYcurve, camInfo['transform'][4])
         rotZkeyEnd.SetTime(rotZcurve, c4d.BaseTime(endTime))
         rotZkeyEnd.SetValue(rotZcurve, camInfo['transform'][5])
+
+        if (curveType == "Sinus"):
+            tangentLength = c4d.BaseTime(length * (4.0/15.0))
+            nTangentLength = c4d.BaseTime(length * (4.0/15.0) * -1)
+
+            posXkeyEnd.SetTimeLeft(posXcurve, nTangentLength)
+            # posXkeyEnd.SetTimeRight(posXcurve, tangentLength)
+            posYkeyEnd.SetTimeLeft(posYcurve, nTangentLength)
+            # posYkeyEnd.SetTimeRight(posYcurve, tangentLength)
+            posZkeyEnd.SetTimeLeft(posZcurve, nTangentLength)
+            # posZkeyEnd.SetTimeRight(posZcurve, tangentLength)
+            rotXkeyEnd.SetTimeLeft(rotXcurve, nTangentLength)
+            # rotXkeyEnd.SetTimeRight(rotXcurve, tangentLength)
+            rotYkeyEnd.SetTimeLeft(rotYcurve, nTangentLength)
+            # rotYkeyEnd.SetTimeRight(rotYcurve, tangentLength)
+            rotZkeyEnd.SetTimeLeft(rotZcurve, nTangentLength)
+            # rotZkeyEnd.SetTimeRight(rotZcurve, tangentLength)
 
         posXcurve.InsertKey(posXkeyEnd)
         posYcurve.InsertKey(posYkeyEnd)
