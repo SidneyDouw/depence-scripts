@@ -5,13 +5,68 @@ import math
 
 import c4d
 from c4d import documents
+from c4d import storage
+from c4d.gui import GeDialog
+
+
+class Dialog(GeDialog):
+
+    document_fps = 30
+    camera_fov = 55
+
+    didPressOK = False
+
+    def CreateLayout(self):
+
+        self.SetTitle("Make VPad Camera")
+
+        self.GroupBegin(111, c4d.BFH_SCALEFIT, cols=2)
+        self.AddStaticText(1000, c4d.BFH_LEFT, name="Sequence FPS", initw=200)
+        self.AddEditSlider(1001, c4d.BFH_SCALEFIT)
+        self.SetInt32(1001, self.document_fps, min=12, max=60, step=1, min2=1, max2=200)
+        self.GroupEnd()
+
+        self.GroupBegin(112, c4d.BFH_SCALEFIT, cols=2)
+        self.AddStaticText(1002, c4d.BFH_LEFT, name="Camera FOV", initw=200)
+        self.AddEditSlider(1003, c4d.BFH_SCALEFIT)
+        self.SetFloat(1003, self.camera_fov, min=0, max=200, step=1, max2=10000, format=c4d.FORMAT_FLOAT)
+        self.GroupEnd()
+
+        self.AddButton(9999, c4d.BFH_CENTER, name="OK", initw=100, inith=12)
+        # self.AddButton(10000, c4d.BFH_CENTER, name = "Cancel", initw = 100, inith = 12)
+        return True
+
+    def Command(self, id, msg):
+
+        if id == 9999:
+            self.document_fps = self.GetInt32(1001)
+            self.camera_fov = self.GetInt32(1003)
+            self.didPressOK = True
+            self.Close()
+
+            return True
+
+        return False
 
 
 def main():
 
-    DOCUMENT_FPS = 30
+    dlg = Dialog()
+    dlg.Open(c4d.DLG_TYPE_MODAL_RESIZEABLE, defaultw=500)
 
-    camInfoArr = parseXML('SEQ_CameraTest_Linear')
+    if not dlg.didPressOK:
+        return
+
+    DOCUMENT_FPS = dlg.document_fps
+    CAMERA_FOV = dlg.camera_fov
+
+    path = storage.LoadDialog(flags=2)
+
+    if not path:
+        print "No path found"
+        return
+
+    camInfoArr = parseXML(path)
     lastEl = camInfoArr[len(camInfoArr) - 1]
 
     # Setup document
@@ -24,7 +79,7 @@ def main():
 
     # Create, setup and insert Camera object
     camera = c4d.BaseObject(c4d.Ocamera)
-    camera[c4d.CAMERAOBJECT_FOV_VERTICAL] = 55 * math.pi/180
+    camera[c4d.CAMERAOBJECT_FOV_VERTICAL] = CAMERA_FOV * math.pi/180
     doc.InsertObject(camera)
 
     posXtrack = c4d.CTrack(camera, [c4d.ID_BASEOBJECT_REL_POSITION, c4d.VECTOR_X])
@@ -161,9 +216,7 @@ def main():
 
 def parseXML(sequence):
 
-    folderPath = os.path.abspath(os.path.dirname(__file__))
-
-    sequenceFile = os.path.join(folderPath, sequence, 'fullsequence.xml')
+    sequenceFile = os.path.join(sequence, 'fullsequence.xml')
 
     tree = ET.parse(sequenceFile)
 
