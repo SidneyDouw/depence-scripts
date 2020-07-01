@@ -299,7 +299,7 @@ def parseXML(sequence):
 def safeGet(elem, attrib):
     val = elem.get(attrib)
     if val is not None:
-        return val
+        return string.replace(val, ",", ".")
     else:
         raise Exception("Attribute '" + str(attrib) + "' not found in '" + str(elem.tag) + "'")
 
