@@ -251,6 +251,10 @@ def parseXML(sequence):
         }
 
         for i, item in enumerate(items):
+
+            print i
+            print item
+
             # Get transform value
             value = safeGet(item, "Phase")
 
@@ -298,7 +302,10 @@ def parseXML(sequence):
 
 def safeGet(elem, attrib):
     val = elem.get(attrib)
-    if val is not None:
+
+    if val is None and attrib == 'Phase':
+        return "0"
+    elif val is not None:
         return string.replace(val, ",", ".")
     else:
         raise Exception("Attribute '" + str(attrib) + "' not found in '" + str(elem.tag) + "'")
