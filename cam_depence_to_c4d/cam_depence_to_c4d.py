@@ -283,9 +283,9 @@ def parseXML(sequence):
             elif fadeType is None and delayType is None:
                 curveType = "Linear"
             else:
-                print "Weird case:\n"
-                print "FadeType: " + str(fadeType) + ", DelayType: " + str(delayType)
-                return
+                errorMsg = "Weird case:\n"
+                errorMsg += "FadeType: " + str(fadeType) + ", DelayType: " + str(delayType)
+                raise Exception(errorMsg)
 
             camInfo['curveType'] = curveType
 
