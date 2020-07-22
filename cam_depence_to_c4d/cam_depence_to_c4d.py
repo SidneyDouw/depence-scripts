@@ -2,6 +2,7 @@ import os
 import xml.etree.ElementTree as ET
 import string
 import math
+import pprint
 
 import c4d
 from c4d import documents
@@ -69,6 +70,8 @@ def main():
     camInfoArr = parseXML(path)
     lastEl = camInfoArr[len(camInfoArr) - 1]
 
+    pprint.pprint(camInfoArr)
+
     # Setup document
     doc = documents.GetActiveDocument()
     doc.SetFps(DOCUMENT_FPS)
@@ -104,6 +107,7 @@ def main():
     rotZcurve = rotZtrack.GetCurve()
 
     previousTransform = [0, 0, 0, 0, 0, 0]
+    previousEndTime = 0
 
     for camInfo in camInfoArr:
 
@@ -113,50 +117,52 @@ def main():
 
         curveType = camInfo['curveType']
 
-        posXkeyStart = c4d.CKey()
-        posYkeyStart = c4d.CKey()
-        posZkeyStart = c4d.CKey()
-        rotXkeyStart = c4d.CKey()
-        rotYkeyStart = c4d.CKey()
-        rotZkeyStart = c4d.CKey()
+        if round(previousEndTime, 5) != round(startTime, 5):
 
-        # Set StartTime values
-        posXkeyStart.SetTime(posXcurve, c4d.BaseTime(startTime))
-        posXkeyStart.SetValue(posXcurve, previousTransform[0])
-        posYkeyStart.SetTime(posYcurve, c4d.BaseTime(startTime))
-        posYkeyStart.SetValue(posYcurve, previousTransform[1])
-        posZkeyStart.SetTime(posZcurve, c4d.BaseTime(startTime))
-        posZkeyStart.SetValue(posZcurve, previousTransform[2])
-        rotXkeyStart.SetTime(rotXcurve, c4d.BaseTime(startTime))
-        rotXkeyStart.SetValue(rotXcurve, previousTransform[3])
-        rotYkeyStart.SetTime(rotYcurve, c4d.BaseTime(startTime))
-        rotYkeyStart.SetValue(rotYcurve, previousTransform[4])
-        rotZkeyStart.SetTime(rotZcurve, c4d.BaseTime(startTime))
-        rotZkeyStart.SetValue(rotZcurve, previousTransform[5])
+            # Set StartTime values
+            posXkeyStart = c4d.CKey()
+            posYkeyStart = c4d.CKey()
+            posZkeyStart = c4d.CKey()
+            rotXkeyStart = c4d.CKey()
+            rotYkeyStart = c4d.CKey()
+            rotZkeyStart = c4d.CKey()
 
-        if (curveType == "Sinus"):
-            tangentLength = c4d.BaseTime(length * (4.0/15.0))
-            nTangentLength = c4d.BaseTime(length * (4.0/15.0) * -1)
+            posXkeyStart.SetTime(posXcurve, c4d.BaseTime(startTime))
+            posXkeyStart.SetValue(posXcurve, previousTransform[0])
+            posYkeyStart.SetTime(posYcurve, c4d.BaseTime(startTime))
+            posYkeyStart.SetValue(posYcurve, previousTransform[1])
+            posZkeyStart.SetTime(posZcurve, c4d.BaseTime(startTime))
+            posZkeyStart.SetValue(posZcurve, previousTransform[2])
+            rotXkeyStart.SetTime(rotXcurve, c4d.BaseTime(startTime))
+            rotXkeyStart.SetValue(rotXcurve, previousTransform[3])
+            rotYkeyStart.SetTime(rotYcurve, c4d.BaseTime(startTime))
+            rotYkeyStart.SetValue(rotYcurve, previousTransform[4])
+            rotZkeyStart.SetTime(rotZcurve, c4d.BaseTime(startTime))
+            rotZkeyStart.SetValue(rotZcurve, previousTransform[5])
 
-            # posXkeyStart.SetTimeLeft(posXcurve, nTangentLength)
-            posXkeyStart.SetTimeRight(posXcurve, tangentLength)
-            # posYkeyStart.SetTimeLeft(posYcurve, nTangentLength)
-            posYkeyStart.SetTimeRight(posYcurve, tangentLength)
-            # posZkeyStart.SetTimeLeft(posZcurve, nTangentLength)
-            posZkeyStart.SetTimeRight(posZcurve, tangentLength)
-            # rotXkeyStart.SetTimeLeft(rotXcurve, nTangentLength)
-            rotXkeyStart.SetTimeRight(rotXcurve, tangentLength)
-            # rotYkeyStart.SetTimeLeft(rotYcurve, nTangentLength)
-            rotYkeyStart.SetTimeRight(rotYcurve, tangentLength)
-            # rotZkeyStart.SetTimeLeft(rotZcurve, nTangentLength)
-            rotZkeyStart.SetTimeRight(rotZcurve, tangentLength)
+            if (curveType == "Sinus"):
+                tangentLength = c4d.BaseTime(length * (4.0/15.0))
+                nTangentLength = c4d.BaseTime(length * (4.0/15.0) * -1)
 
-        posXcurve.InsertKey(posXkeyStart)
-        posYcurve.InsertKey(posYkeyStart)
-        posZcurve.InsertKey(posZkeyStart)
-        rotXcurve.InsertKey(rotXkeyStart)
-        rotYcurve.InsertKey(rotYkeyStart)
-        rotZcurve.InsertKey(rotZkeyStart)
+                # posXkeyStart.SetTimeLeft(posXcurve, nTangentLength)
+                posXkeyStart.SetTimeRight(posXcurve, tangentLength)
+                # posYkeyStart.SetTimeLeft(posYcurve, nTangentLength)
+                posYkeyStart.SetTimeRight(posYcurve, tangentLength)
+                # posZkeyStart.SetTimeLeft(posZcurve, nTangentLength)
+                posZkeyStart.SetTimeRight(posZcurve, tangentLength)
+                # rotXkeyStart.SetTimeLeft(rotXcurve, nTangentLength)
+                rotXkeyStart.SetTimeRight(rotXcurve, tangentLength)
+                # rotYkeyStart.SetTimeLeft(rotYcurve, nTangentLength)
+                rotYkeyStart.SetTimeRight(rotYcurve, tangentLength)
+                # rotZkeyStart.SetTimeLeft(rotZcurve, nTangentLength)
+                rotZkeyStart.SetTimeRight(rotZcurve, tangentLength)
+
+            posXcurve.InsertKey(posXkeyStart)
+            posYcurve.InsertKey(posYkeyStart)
+            posZcurve.InsertKey(posZkeyStart)
+            rotXcurve.InsertKey(rotXkeyStart)
+            rotYcurve.InsertKey(rotYkeyStart)
+            rotZcurve.InsertKey(rotZkeyStart)
 
         # Set EndTime values
         posXkeyEnd = c4d.CKey()
@@ -203,7 +209,7 @@ def main():
         rotYcurve.InsertKey(rotYkeyEnd)
         rotZcurve.InsertKey(rotZkeyEnd)
 
-        # Set previousTransform to endTime
+        # Set previousTransform to endTime values
         previousTransform = [
             camInfo['transform'][0],
             camInfo['transform'][1],
@@ -212,6 +218,8 @@ def main():
             camInfo['transform'][4],
             camInfo['transform'][5]
         ]
+
+        previousEndTime = endTime
 
 
 def parseXML(sequence):
@@ -251,9 +259,6 @@ def parseXML(sequence):
         }
 
         for i, item in enumerate(items):
-
-            print i
-            print item
 
             # Get transform value
             value = safeGet(item, "Phase")
